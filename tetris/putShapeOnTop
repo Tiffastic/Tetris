@@ -1,0 +1,23 @@
+private void putShapeOnRow(Integer[][] array, boolean putOnTop) 
+	{
+		tempValues.clear();
+
+		// if there is collision, then we put the shape on top of the row, if not then we put the shape on the row.
+		int startingAt = (putOnTop)? fallToRow-1 : fallToRow;
+		//shapeCol < randomShape[0].length; col++
+		for (int col = fallToCol, shapeCol = startingCol; col < width && shapeCol <= endingCol; col++, shapeCol++)
+		{
+			for (int row = startingAt, shapeRow = furthestBottom; shapeRow >= shapeTopRow; row--, shapeRow--)
+			{
+				//System.out.println("Row = " + row);
+
+				if (board[row][col] == 0)
+				{
+					board[row][col] = randomShape[shapeRow][shapeCol];
+					tempValues.add(new Point (row, col));
+				}
+
+			}
+		}
+
+	}

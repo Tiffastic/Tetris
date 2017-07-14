@@ -1,0 +1,348 @@
+private boolean detectCollision()
+	{
+		boolean occupied = false;
+		for (Point point : furthestBottomDyDx)  // for each displacement calculations for the bottom row
+		{
+			if (board[fallToRow-point.y][fallToCol+point.x] != 0)  // subtrace from the fallToRow the displacement dy, because there is where the shape piece at that point will fall
+			{
+				// add to the fallToCol the displacement dx for that shape piece. 
+				occupied = true;
+				break;
+			}
+		}
+	
+		return occupied;
+	}
+	
+	
+	
+	
+	public void putShapeOnRow(Integer[][] array, boolean collided)
+	{
+		tempValues.clear();
+		int shapePlacement = fallToRow; 
+		if (collided)  // here is the key: if there is collision, then put the shape on fallToRow-1.  Else, the shape goes on the fallToRow
+		{
+			shapePlacement -= 1; 
+		}
+
+		try
+		{
+			for (int col = fallToCol, shapeCol = 0; col < width && shapeCol != 4; col++, shapeCol++)
+			{
+				for (int row = shapePlacement, shapeRow = shapeSize-1; row >= shapePlacement-shapeSize-1; row--, shapeRow--)
+				{
+					board[row][col] = randomShape[shapeRow][shapeCol];
+					tempValues.add(new Point(row, col));
+				}
+			}
+		} catch (Exception e)
+		{
+			JOptionPane.showMessageDialog(null, "Crashed!");
+		}
+	}
+	
+	
+	for (int col = fallToCol, shapeCol = 0; col < width && shapeCol < shapeSize; col++, shapeCol++)
+		{
+			int row = fallToRow;
+			if (board[fallToRow][fallToCol] != 0)
+			{
+				row++;
+			}
+			
+			for (int shapeRow = shapeSize-1; row >= 0 && shapeRow >= 0; shapeRow--)
+			{
+				
+					if (randomShape[shapeRow][shapeCol] != 0)
+					{
+						board[row][col] = randomShape[shapeRow][shapeCol];
+						tempValues.add(new Point(row, col));
+						row--;
+					}
+					
+			}
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		System.out.println("Entered if statement");
+						 int boardValue = board[row][fallToCol+point.x];
+						 System.out.println("Board value = " + boardValue);
+						 System.out.println("shapeRow = " + shapeRow);
+						 System.out.println("fallToCol = " + fallToCol);
+						 System.out.println("point.x = " + point.x);
+						 System.out.println("fallToCol+point.x = " + (fallToCol+point.x)); // IMPORTANT: WHEN adding math operations to a string, ENCLOSE the operation in parentheses or else the operation doesn't get carried out, instead the string just concatenates the literal value of the numbers
+						
+						 
+						 System.out.println("random value = " + randomShape[shapeRow][0+point.x]);
+						 
+						 
+						 
+						 		System.out.printf("board[%d][%d] = randomShape[%d][%d]\n", row, fallToCol+point.x,
+							shapeRow, 0+point.x);
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							public void putShapeOnRow(Integer[][] array, boolean collided)
+	{
+		tempValues.clear();
+		
+		// find the dx and dy of the bottom of the shape in getFurthestDyDx, so that we know where to start 
+		// our fallToRow and fallToCol from
+
+		try
+		{
+			System.out.println("Enter for loop:");
+			System.out.println("fall to row = " + fallToRow);
+			for (Point point : furthestBottomDyDx)
+			{
+				//shapeSize-1-point.y
+				for (int row = fallToRow-point.y, shapeRow = furthestBottom ; row >= 0 && shapeRow >= 0; row--, shapeRow--)
+				{
+					System.out.println("row = " + (fallToRow-point.y));
+					System.out.println("shapeRow = " + (shapeSize-1-point.y));
+					if (board[row][fallToCol+point.x] == 0)
+					{
+						board[row][fallToCol+point.x] = randomShape[shapeRow][0+point.x];
+						
+						System.out.printf("board[%d][%d] = randomShape[%d][%d]\n", row, (fallToCol+point.x),
+								shapeRow, (0+point.x));
+						System.out.println("board[row][fallToCol+point.x] = " + board[row][fallToCol+point.x]);
+						System.out.println("randomShape[shapeRow][0+point.x] = " + randomShape[shapeRow][0+point.x]);
+						System.out.printf("%d = %d\n", (board[row][fallToCol+point.x]), (randomShape[shapeRow][0+point.x]));
+						
+					
+						tempValues.add(new Point(row, fallToCol+point.x));
+					}
+		
+					
+				}
+
+			}
+
+		}
+		catch(Exception e)
+		{
+			System.out.println("coming down");
+		}
+		
+		
+		System.out.println("********************************done putting shape on row********************************************");
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//System.out.println("Moving left");
+					boolean canMoveLeft = true; 
+					try
+					{
+						for (Point point : furthestLeftDyDx)
+						{
+							if (board[fallToRow-point.y][fallToCol+point.x-1] != 0)
+							//if (board[fallToRow-point.y][fallToCol+startingCol] != 0)
+							{
+								canMoveLeft = false;
+								break;
+							}
+						}
+					}
+					catch(ArrayIndexOutOfBoundsException e2)
+					{
+						canMoveLeft = false;
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					boolean canMoveRight = true;
+					int dx = 0, dy = 0;
+					try
+					{
+
+						for (Point point : furthestRightDyDx)
+						{
+							dx = point.x;
+							dy = point.y;
+							// if the space next to the furthest right is occupied with a number other than zero
+							// we cannot move right.
+							if (board[fallToRow-dy][fallToCol+dx+1] != 0)
+							{
+								canMoveRight = false;
+							}
+						}
+					}
+					catch(ArrayIndexOutOfBoundsException e2)
+					{
+						//						if (fallToCol + dx + 1 > width-1)
+						//						{
+						//							canMoveRight = false;
+						//						}
+
+						//canMoveRight = false;
+						canMoveRight = false;
+
+					}
+					
+					
+					
+			private boolean canMoveRight()
+	{
+		boolean moveRight = true;
+		boolean hasMostRight = false;
+		try
+		{
+			int rightCol = fallToCol + shapeSize-1;
+			for (int row = fallToRow; row > fallToRow- shapeSize; row--)
+			{
+				System.out.println("fall to row - shapeSize  = " + (fallToRow-shapeSize));
+				System.out.println("row = " + row);
+				
+				for (int col = rightCol; col >= fallToCol; col--)
+				{
+					System.out.println("Fall to col + shapeSize-1 = " + (fallToCol+shapeSize-1));
+					System.out.println("col = " + col);
+					System.out.printf("board[%d][%d] = %d\n", row, col, board[row][col]);
+					if (board[row][col] != 0)
+					{System.out.println("Entered into if statement");
+						
+						if (board[row][col+1] != 0)
+						{
+							System.err.println("Can't move right");
+							return false;
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "else");
+							if (!hasMostRight)
+							{
+								mostRightCol = col;
+								hasMostRight = true;
+								System.out.println("most right = " + mostRightCol);
+							}
+							break;
+						}
+						
+					}
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+		
+		
+		return moveRight;
+	}
+	
+	
+	
+		private boolean canMoveLeft()
+	{
+		boolean moveLeft = true; 
+		
+		try
+		{
+			
+			// search through each row at the current fallToRow 
+			for (int row = fallToRow; row > fallToRow-shapeSize; row--)
+			{
+				// search through the current fallToCols one by one until we
+				// find a non zero piece
+				for (int col = fallToCol; col < fallToCol + shapeSize; col++)
+				{
+					// if the piece is non zero, then we found the left most piece
+					// check to see if the space next to it is zero.  If not, then return false
+					// else, break and go to the next row.  
+					if (board[row][col] != 0)
+					{
+						if (board[row][col-1] != 0)
+						{
+							return false;
+						}
+						else
+						{
+							break;
+						}
+					}
+				}
+			}
+
+		}
+		
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+			return moveLeft;
+	}
+			
+				
+					
+					
+private void changeShapeColor()
+	{
+		int red = generator.nextInt(256);
+		int green = generator.nextInt(256);
+		int blue = generator.nextInt(256);
+		
+		// multiply the shapeColor by 8 to give it a new shapeColor.  8 because we already have the 7 original shapes with their original numbers 1-7.  Mod Integer.MAX_VALUE so we don't go over the limit
+		shapeColor = (shapeColor * 8)%Integer.MAX_VALUE + 8;  // change the shape's id, so that in the switch statement to select the color, it falls to the default, selecting the shapeColorChangeRGB 
+		shapeColorChangeRGB = new Color(red, green, blue);
+	}
+					
+					
+					
+					
+					

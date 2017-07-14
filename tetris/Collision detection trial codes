@@ -1,0 +1,149 @@
+private boolean hasAboveRotationalCollision(int closestNeighborRow, int lengthBeforeRotation, int heightBeforeRotation)
+	{
+		// after rotation:  
+		if (fallToRow - lengthBeforeRotation <= closestNeighborRow)  // if after rotation the shape is now at a higher row then its closest neighbor above before rotation, then there is collision.
+		{  // being higher means having a lower row number on the matrix.  .  
+			System.out.println("Has above collision lengthwise");
+			return true;
+		}
+
+		if (fallToRow - heightBeforeRotation <= closestNeighborRow)
+		{
+			System.out.println("Has above collision heightwise");
+			return true;
+		}
+		
+		return false;
+
+	}
+	
+	
+	
+	private boolean hasRightRotationCollision(int closestRightNeighborColumn, int heightBeforeRotation)
+	{
+		// after rotation:  
+		// if the fallToCol plus the shape's length is now greater than the closest right neighbor column before rotation, then there is collision.  
+		if (fallToCol + heightBeforeRotation >= closestRightNeighborColumn)
+		{
+			System.out.println("Has right rotation collision");
+			return true;
+		}
+
+		return false;
+	}
+	
+	
+	
+	
+	//	private boolean hasAboveRightRotationCollision(int closestNeighborRow, int lengthBeforeRotation)
+//	{
+//		if (closestNeighborRow >= fallToRow-lengthBeforeRotation)
+//		{
+//			return true;
+//		}
+//		
+//		return false;
+//	}
+
+
+
+
+private int findClosestNeighborRowAbove()
+	{
+		// check the rows above the surface of each shape piece to find the closest neighbor row.  
+		int closestNeighborRow = rowLimit-1; 
+		for (Point point : surfaceDyDx)
+		{
+			// iterate up this piece surface area row
+			for (int rowAbove = fallToRow-point.y-1; rowAbove >= rowLimit-1; rowAbove--)
+			{
+				// if the row above this piece is not zero
+
+				if (board[rowAbove][fallToCol+point.x] != 0)
+				{
+					//then that would be the neighbor row
+
+					// compare the neighbor row with the closest neighbor row so far, to see which row is closer (closer means a higher row number on the matrix)
+					if (rowAbove > closestNeighborRow)
+					{
+						closestNeighborRow = rowAbove;
+						break; // IMPORTANT: BREAK after finding the closest row above.  
+					}
+				}
+			}
+		}
+		return closestNeighborRow;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//	private boolean hasLeftRotationCollision(int closestLeftNeighborColumn, int heightBeforeRotation)
+//	{
+//		// if the fall to col minus the shape's height before rotation is less or equal to the closest left column before rotatiomn, then there is collision
+//		//if (fallToCol - heightBeforeRotation <= closestLeftNeighborColumn)
+//		if (fallToCol - 1 == closestLeftNeighborColumn)
+//		{
+//			System.out.println("Has left rotation collision");
+//			return true; 
+//		}
+//
+//		return false; 
+//	}
+
+
+
+
+private int findClosestRightNeighborColumn()
+	{
+		int closestNeighbor = width; 
+		for (Point point : rightDyDx)
+		{
+			for (int rightNeighbor = fallToCol+point.x+1; rightNeighbor <= width-1; rightNeighbor++)
+			{
+				if (board[fallToRow-point.y][rightNeighbor] != 0)
+				{
+					if (rightNeighbor < closestNeighbor)   // smaller column number on the matrix means closer right of the shape
+					{
+						closestNeighbor = rightNeighbor;
+						break;  // IMPORTANT:  BREAK after finding the closest neighbor to the right
+					}
+				}
+			}
+		}
+
+		return closestNeighbor; 
+	}
+	
+	
+	
+	
+		private int findClosestLeftNeighborColumn()
+	{
+		int closestLeftNeighbor = 0; 
+
+		for (Point point : leftDyDx)
+		{
+			//printValueAtDyDx(point.x, point.y);
+			int row = fallToRow-point.y;
+			for(int leftColumn = fallToCol+point.x-1; leftColumn >= 0; leftColumn--)
+			{
+				if (board[row][leftColumn] != 0)
+				{
+					if (leftColumn > closestLeftNeighbor)   // the column closer the shape is the higher numbered 
+					{
+						closestLeftNeighbor = leftColumn; 
+						break;  // IMPORTANT:  BREAK after finding the closest left neighbor of the piece.  
+					}
+				}
+			}
+		}
+		return closestLeftNeighbor; 
+	}
+	

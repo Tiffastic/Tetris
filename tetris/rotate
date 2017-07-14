@@ -1,0 +1,45 @@
+Fall to row before = 4
+Fall to row after dx = 4
+0 0 0 
+4 4 0 
+4 4 0 
+
+Left Rotation: 1
+0 0 0 
+0 4 4 
+0 4 4 
+
+Left Rotation: 2
+0 4 4 
+0 4 4 
+0 0 0 
+
+Left Rotation: 3
+4 4 0 
+4 4 0 
+0 0 0 
+
+Left Rotation: 4
+0 0 0 
+4 4 0 
+4 4 0 
+
+Right Rotation: 1
+4 4 0 
+4 4 0 
+0 0 0 
+
+Right Rotation: 2
+0 4 4 
+0 4 4 
+0 0 0 
+
+Right Rotation: 3
+0 0 0 
+0 4 4 
+0 4 4 
+
+Right Rotation: 4
+0 0 0 
+4 4 0 
+4 4 0 

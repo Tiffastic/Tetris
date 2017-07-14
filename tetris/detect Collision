@@ -1,0 +1,110 @@
+	private boolean detectCollision()
+	{
+
+		boolean occupied = false;
+		putShapeOnTop = false;	
+		
+
+			for (int col = fallToCol, shapeCol = startingCol; col < width && shapeCol <= endingCol; col++, shapeCol++)
+			{
+		
+//				System.out.println("******************************************************");
+//				System.out.println("count = " + count);
+//				System.out.printf("board[%d][%d] = %d \n", fallToRow, col, (board[fallToRow][col]));
+//				System.out.printf("randomShape[%d][%d] = %d\n", furthestBottom, shapeCol, randomShape[furthestBottom][shapeCol] );
+//				System.out.println("********************************************************");
+			
+				boolean willCollide = false; 
+				if (board[fallToRow][col] !=0 && board[fallToRow-1][col] == 0)  // if there is an occupied space at the fallToRow
+				{
+					
+					if (randomShape[furthestBottom][shapeCol] != 0)
+					{
+						willCollide = true;
+					}
+					
+					if (willCollide)
+					{
+						// if there is collision, find out if we need to put the 
+						// shape on top of the fallToRow, or not
+						// the shape goes on top if at the bottom row at the current col of the randomShape matrix there is a number there.
+						// we need to search all the fallToRow to see if we need to put the shape on top. 
+						// DON'T just break out of the method after finding the first piece that collides.  
+						if (randomShape[furthestBottom][shapeCol] != 0)
+							{
+									putShapeOnTop = true;	
+							}
+							occupied = true;
+					}
+					
+				
+					// check to see if there is any pieces in that particular column, there will only be collision if
+					// there is both a piece in the fallToRow and a at the corresponding rowcol of the shape
+					
+					
+				}
+			System.out.println();
+		}
+			
+		System.out.println();
+		return occupied;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private boolean detectCollision()
+	{
+//		System.err.println("******************Furthest Bottom Dy Dx*************************");
+//		System.out.println("board[fallToRow-point.y][fallToCol+point.x]");
+//		System.out.println();
+		System.out.println("Fall to row : " + fallToRow);
+		System.out.println("Fall to col: " + fallToCol);
+		System.out.println();
+		boolean collided = false;
+		putShapeOnTop = false;	
+		
+		// go through the furthest bottom dy dx to see if the fallToRow has space for where the shape's bottoms are
+		try
+		{
+			for (Point point : furthestBottomDyDx)
+			{
+//				System.out.println();
+//				System.out.println("point.y = " + point.y);
+//				System.out.println("point.x = " + point.x);
+//				System.out.println();
+				
+				//System.out.printf("board[%d][%d] = %d\n", fallToRow-point.y, fallToCol+point.x, board[fallToRow-point.y][fallToCol+point.x]);
+				if (board[fallToRow-point.y][fallToCol+point.x] != 0)
+				{
+					collided = true;
+					putShapeOnTop = true;
+					//System.err.println("Collision!");
+					break;
+				}
+			}
+			
+			//System.out.println("****************End of Furthest Bottom evaluation******************");
+
+		}
+		catch(ArrayIndexOutOfBoundsException e)
+		{
+			tetrisTimer.stop();
+			JOptionPane.showMessageDialog(null, "Crash from detect collision");
+		}
+		
+		return collided;
+	
+	}

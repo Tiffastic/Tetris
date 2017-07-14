@@ -1,0 +1,624 @@
+//		try
+//		{
+//			int locationY = fallToRow;
+//		for (int i = shapeSize-1; i >= 0; i--)
+//		{
+//			int locationX = fallToCol;
+//			for (int j = 0; j < shapeSize; j++)
+//			{
+//				if (randomShape[i][j] != 0)
+//				{
+//						board[locationY][locationX] = tempValue;
+//				}
+//				locationX++;
+//			
+//			}
+//			locationY--;
+//			if (locationY <= 0)
+//			{
+//				tetrisTimer.stop();
+//				JOptionPane.showMessageDialog(null, "Crashed");
+//			}
+//		}
+//		}
+//		catch(Exception e)
+//		{
+//			System.out.println("out of bounds in method fillInTempValue");
+//		}
+//		
+
+
+
+
+	private void checkCrash()
+	{
+
+		for (int row = 0; row == 0; row++)
+		{
+			for (int col = 0; col < board[row].length; col++)
+			{
+				//if (board[row][col] !=)
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void getFurthestRightDyDx()
+	{
+		furthestRightDyDx.clear();
+		int halfShapeSize = shapeSize/2;
+		for (int col = shapeSize-1; col >= 0; col--)
+		{  
+			for (int row = shapeSize-1; row >= 0; row--)
+			{
+				if (randomShape[row][col] != 0)
+				{
+					int colOverCount = 0;
+					for (int colOver = col; colOver >= 0; col--)
+					{
+						colOverCount++;
+						if (colOverCount > halfShapeSize)
+						{
+							break;
+						}
+						for (int rowUp = shapeSize-1; rowUp >= 0; rowUp--)
+						{
+							if (randomShape[rowUp][colOver] != 0)
+							{
+								if (colOver == shapeSize-1)
+								{
+										furthestRightDy = shapeSize-1-rowUp;
+										furthestRightDx = colOver;
+										furthestRightDyDx.add(new Point (furthestRightDx, furthestRightDy));
+								}
+								else
+								{  // check to see if there is a space to the right of the piece we're checking
+									// if there is a space, then the piece is at the furthest right.
+									if (randomShape[rowUp][colOver+1] == 0)
+									{
+										furthestRightDy = shapeSize-1-rowUp;
+										furthestRightDx = colOver;
+										furthestRightDyDx.add(new Point (furthestRightDx, furthestRightDy));
+									}
+								}
+							
+							}
+
+
+						}
+
+					}
+				
+					return;
+				}
+			
+			}
+		}
+		
+		
+		
+		
+		
+			public void getFurthestLeftDyDx()
+	{
+		furthestLeftDyDx.clear();
+		int halfShapeSize = shapeSize/2;
+		for (int col = 0 ; col < shapeSize; col++)
+		{
+			for (int row = shapeSize-1; row >= 0; row--)
+			{
+				if (randomShape[row][col] != 0)
+				{
+					int countColOver = 0; 
+					for (int colOver = col; colOver < shapeSize; colOver++)
+					{
+						countColOver++;
+						if (countColOver > halfShapeSize)
+						{
+							break;
+						}
+						for (int rowUp = shapeSize-1; rowUp >= 0; rowUp--)
+						{
+							if (randomShape[rowUp][colOver] != 0)
+							{
+								if (colOver == 0)
+								{
+										furthestLeftDy = shapeSize-1-rowUp;
+										furthestLeftDx = colOver;
+										furthestLeftDyDx.add(new Point (furthestLeftDx, furthestLeftDy));
+								}
+								else
+								{
+									if (randomShape[rowUp][colOver-1] == 0)
+									{
+										furthestLeftDy = shapeSize-1-rowUp;
+										furthestLeftDx = colOver;
+										furthestLeftDyDx.add(new Point (furthestLeftDx, furthestLeftDy));
+									}
+								}
+							
+							}
+
+						}
+					}
+					
+					return;
+				}
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	furthestBottomDyDx.clear();
+		for (int col = 0; col < array.length; col++)
+		{
+			for (int row = array[col].length-1; row >= 0; row--)
+			{
+				if (array[row][col] != 0)
+				{
+					for (int colOver = col; colOver < array.length; colOver++)
+					{
+						for (int rowUp = array[colOver].length-1; rowUp >= 0; rowUp--)
+						{
+							if (array[rowUp][colOver] != 0)
+							{
+								int colDx = colOver;
+								int rowDy = shapeSize -1- rowUp;
+								furthestBottomDyDx.add(new Point(colDx, rowDy));
+								break;
+							}
+						}
+					}
+					return;
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		furthestRightDyDx.clear();
+		int halfShapeSize = shapeSize/2;
+		for (int col = shapeSize-1; col >= 0; col--)
+		{  
+			for (int row = shapeSize-1; row >= 0; row--)
+			{
+				if (array[row][col] != 0)
+				{
+					
+					int colOverCount = 0;
+					
+					for (int colOver = col; colOver >= 0; colOver--)
+					{
+						colOverCount++;
+						if (colOverCount > halfShapeSize)
+						{
+							break;
+						}
+						for (int rowUp = shapeSize-1; rowUp >= 0; rowUp--)
+						{
+							
+							
+							if (array[rowUp][colOver] != 0)
+							{
+								// check whether there is another piece on the right of the piece we're checking
+								if (colOver == shapeSize-1)
+								{
+										furthestRightDy = shapeSize-1-rowUp;
+										furthestRightDx = colOver;
+										furthestRightDyDx.add(new Point (furthestRightDx, furthestRightDy));
+								}
+								else
+								{
+									if (array[rowUp][colOver + 1] == 0)
+									{
+										furthestRightDy = shapeSize-1-rowUp;
+										furthestRightDx = colOver;
+										furthestRightDyDx.add(new Point (furthestRightDx, furthestRightDy));
+									}
+								}
+								
+							}
+							
+								
+						}
+						
+					}
+				
+					//System.out.println("furthest right: ");
+					//System.out.println(furthestRightDyDx);
+					return;
+				}
+			
+			}
+		}
+		//System.out.println("Furthest column = " + furthestColumn);
+		//return furthestColumn; 
+		
+		
+		
+		
+		
+	
+	
+	private void fillInShapeValue(int valueOfShape, int startingAt, boolean occupied)
+	{
+		//		if (fallToRow - startingAt < 0)
+		//		{
+		//			tetrisTimer.stop();
+		//			JOptionPane.showMessageDialog(null, "Crash");
+		//			return;
+		//		}
+
+		try
+		{
+			int shapeRow = shapeSize-1;
+			for (int row = 1; row <= 4; row++)
+			{
+				if (shapeRow < 0)
+				{
+					break;
+				}
+				int shapeCol = 0;
+				for (int col = fallToCol; col < width; col++)
+				{
+					if (shapeCol == 4)
+					{
+						break;
+					}
+					if (board[fallToRow-startingAt][col] == 0)
+					{
+						board[fallToRow-startingAt][col] = randomShape[shapeRow][shapeCol];
+						if (!occupied)
+						{
+							tempValues.add(new Point(fallToRow-startingAt, col));
+						}
+
+					}
+
+					shapeCol++;
+				}
+
+				shapeRow--;
+				startingAt++;
+			}
+		}
+		catch(Exception e)
+		{
+			if (occupied)
+			{
+				tetrisTimer.stop();
+				JOptionPane.showMessageDialog(null, "Crash from catch exception"
+						+ "");
+			}
+		}
+
+
+	}		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			private void getFurthestLeftDyDx(Integer[][] array)
+	{
+		furthestLeftDyDx.clear();
+		int halfShapeSize = shapeSize/2; 
+		for (int col = 0 ; col < shapeSize; col++)
+		{
+			for (int row = shapeSize-1; row >= 0; row--)
+			{
+				if (array[row][col] != 0)
+				{
+					int countColOver = 0; 
+					for (int colOver = col; colOver < shapeSize; colOver++)
+					{
+						countColOver++;
+						if (countColOver > halfShapeSize)
+						{
+							break;
+						}
+						for (int rowUp = shapeSize-1; rowUp >= 0; rowUp--)
+						{
+							if (array[rowUp][colOver] != 0)
+							{
+								if (colOver == 0)
+								{
+										furthestLeftDy = shapeSize-1-rowUp;
+									furthestLeftDx = colOver;
+									furthestLeftDyDx.add(new Point (furthestLeftDx, furthestLeftDy));
+								}
+								else
+								{
+									if (array[rowUp][colOver-1] == 0)
+									{
+										furthestLeftDy = shapeSize-1-rowUp;
+										furthestLeftDx = colOver;
+										furthestLeftDyDx.add(new Point (furthestLeftDx, furthestLeftDy));
+									}
+								}
+								
+							}
+
+						}
+					}
+				
+					
+					//System.out.println(furthestLeftDyDx);
+					return;
+				}
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	boolean occupied = false; 
+		collidingRow = 1;
+		mainLoop:
+			for (int i = shapeSize - 1; i >= 0; i--)
+			{
+				int colOver = 0;
+
+
+				for (int row = fallToRow; row < board.length; row++)
+				{
+					for (int col = fallToCol; col < board[row].length; col++)
+					{
+						if (colOver == 4)
+						{
+							break; 
+						}
+						if (board[row][col] != 0)
+						{
+							if (randomShape[i][colOver] != 0)  // see if the bottom row of the shape array is a space or not
+							{
+								occupied = true;
+								collidingCol = colOver;
+								break mainLoop;
+							}
+						}	
+
+						colOver++;
+					}
+				}
+
+				collidingRow--; 
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			public void putShapeOnRow(Integer[][] array, boolean collided)
+	{
+		tempValues.clear();
+		int colCount = 0; 
+		for (int col = fallToCol; col < width; col++)
+		{
+			
+			if (colCount >= shapeSize)
+			{
+				return; 
+			}
+			boolean hasSpace = false;
+			int rowUp = 0;
+			while(!hasSpace)
+			{
+				if (board[fallToRow-rowUp][col] == 0)
+				{
+					hasSpace = true;
+				}
+				else
+				{
+					rowUp++;
+				}
+			}
+			int startingRow = fallToRow;
+			try
+			{
+				startingRow = fallToRow-rowUp;
+			}
+			catch(ArrayIndexOutOfBoundsException e)
+			{
+				JOptionPane.showMessageDialog(null, "Crash");
+			}
+			
+			int rowUpCount = 0;
+			try
+			{
+				for (int j = randomShape.length-1; j >= 0; j--)
+				{
+					//System.out.printf("randomShape[%d][%d] = %d\n", j, colCount, randomShape[j][colCount]);
+					board[startingRow-rowUpCount][col] = randomShape[j][colCount]; 
+					tempValues.add(new Point(startingRow-rowUpCount, col));
+					rowUpCount++;
+				}
+				
+			}
+			catch(Exception e)
+			{
+				//System.out.println("Coming down");
+			}
+				
+			colCount++;
+		}
+	}
+	
+	private void drawGamePieces(Graphics g)
+	{
+		// establish the x and y in order to draw the rectangles
+		// we want the program to start drawing from the bottom row at first column
+		int y = getHeight() - size;   // the bottom row at whatever the frame size will be.  This is the y coordinate for the rectangle
+		int x = 0;  // xcoordinate for tetris rectangle
+
+		// use a nested for loop to draw the rectangle.
+		//if the value of the 2D array at that point is not
+		// zero, then draw the rectangle with its assigned color
+		// make sure to have a gap between the pieces.  
+		for (int i = board.length-1; i >= 0; i--)
+		{
+			for (int j = 0; j < board[i].length; j++)
+			{
+				// we have an option of pressing the "N" key to see the number matrix.
+				if (!showNumberMatrix)
+				{
+					if (board[i][j] != 0)  // the zeros are the spaces, so fill in the rectangles with values of not zero
+					{
+						g.setColor(getPieceColor(board[i][j]));
+						g.fillRect(x, y, size, size);
+					}
+				}
+				else  // if we want the number matrix to show:
+				{
+					g.setFont(new Font("Times Roman", Font.BOLD, 16));
+					if (board[i][j] != 0)
+					{
+						g.setColor(getPieceColor(board[i][j]));
+						g.drawString(""+board[i][j], x, y);
+					}
+					else
+					{
+
+						g.setColor(Color.white);
+						g.drawString(0+"", x, y);
+					}
+				}
+
+				x += size + gap; 
+			}
+
+			x = 0;
+			y -= size+gap; 
+
+		}
+	}
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				private boolean detectCollision()
+	{
+		boolean occupied = false;
+		int colCount = -1; 
+		mainLoop:
+		for (int row = fallToRow; row <= fallToRow; row++)
+		{
+			for (int col = fallToCol; col < width; col++)
+			{
+				colCount++;
+				if (colCount == furthestBottomDyDx.size())
+				{
+					break mainLoop;
+				}
+				
+				int dx = furthestBottomDyDx.get(colCount).x;
+				int dy = furthestBottomDyDx.get(colCount).y;
+				
+				try
+				{
+					if (board[fallToRow-dx][fallToCol+dy] != 0)
+					{
+						occupied = true;
+						System.out.printf("board[%d][%d] != 0, = %d\n", fallToRow-dx, fallToCol+dy, board[fallToRow-dx][fallToCol+dy]);
+						
+						break mainLoop;
+					}
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{
+					System.out.println("Inside collsion detection catch block");
+					//System.out.println("Evaluating collision");
+				}
+		
+
+			}
+		}
+		return occupied;
+	}
+			

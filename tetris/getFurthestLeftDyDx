@@ -1,0 +1,50 @@
+private void getFurthestLeftDyDx(Integer[][] array)
+	{
+		furthestLeftDyDx.clear();
+		int halfShapeSize = shapeSize/2; 
+		for (int col = 0 ; col < shapeSize; col++)
+		{
+			for (int row = shapeSize-1; row >= 0; row--)
+			{
+				if (array[row][col] != 0)
+				{
+					int countColOver = 0; 
+					for (int colOver = col; colOver < shapeSize; colOver++)
+					{
+						countColOver++;
+						if (countColOver > halfShapeSize)
+						{
+							break;
+						}
+						for (int rowUp = shapeSize-1; rowUp >= 0; rowUp--)
+						{
+							if (array[rowUp][colOver] != 0)
+							{
+								if (colOver == 0)
+								{
+									furthestLeftDy = shapeSize-1-rowUp;
+									furthestLeftDx = colOver;
+									furthestLeftDyDx.add(new Point (furthestLeftDx, furthestLeftDy));
+								}
+								else
+								{
+									if (array[rowUp][colOver-1] == 0)
+									{
+										furthestLeftDy = shapeSize-1-rowUp;
+										furthestLeftDx = colOver;
+										furthestLeftDyDx.add(new Point (furthestLeftDx, furthestLeftDy));
+									}
+								}
+
+							}
+
+						}
+					}
+
+
+					//System.out.println(furthestLeftDyDx);
+					return;
+				}
+			}
+		}
+	}

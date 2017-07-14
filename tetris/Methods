@@ -1,0 +1,26 @@
+private boolean canMoveUp()
+	{
+		try
+		{
+			for (Point point : surfaceDyDx)
+			{
+				// IMPORTANT:  we must subtract one from fallToRow-point.y because
+				// that is the space above that we need to look at to see if we can go up.  
+				// if we don't then we just have the current space, which is of course, not occupied.  
+				int spaceAt = board[fallToRow-point.y-1][fallToCol+point.x];
+				// rowLimit+1 is where I put the top wall at
+				int rowAbove = 1; 
+				if (spaceAt != 0 || (fallToRow - heightDy - rowAbove <= rowLimit-1))
+				{
+					return false;
+				}
+			}
+		}
+		catch(ArrayIndexOutOfBoundsException e)
+		{
+			return false;
+		}
+
+		return true;
+	}
+	

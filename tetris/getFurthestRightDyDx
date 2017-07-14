@@ -1,0 +1,125 @@
+public void getFurthestRightDyDx(Integer[][] array)
+	{
+
+		furthestRightDyDx.clear();
+		int halfShapeSize = shapeSize/2;
+		for (int col = shapeSize-1; col >= 0; col--)
+		{  
+			for (int row = shapeSize-1; row >= 0; row--)
+			{
+				if (array[row][col] != 0)
+				{
+
+					int colOverCount = 0;
+
+					for (int colOver = col; colOver >= 0; colOver--)
+					{
+						colOverCount++;
+						if (colOverCount > halfShapeSize)
+						{
+							break;
+						}
+						for (int rowUp = shapeSize-1; rowUp >= 0; rowUp--)
+						{
+
+
+							if (array[rowUp][colOver] != 0)
+							{
+								// check whether there is another piece on the right of the piece we're checking
+								if (colOver == shapeSize-1)
+								{
+									furthestRightDy = shapeSize-1-rowUp;
+									furthestRightDx = colOver;
+									furthestRightDyDx.add(new Point (furthestRightDx, furthestRightDy));
+								}
+								else
+								{
+									if (array[rowUp][colOver + 1] == 0)
+									{
+										furthestRightDy = shapeSize-1-rowUp;
+										furthestRightDx = colOver;
+										furthestRightDyDx.add(new Point (furthestRightDx, furthestRightDy));
+									}
+								}
+
+							}
+
+
+						}
+
+					}
+
+					//System.out.println("furthest right: ");
+					//System.out.println(furthestRightDyDx);
+					return;
+				}
+
+			}
+		}
+		//System.out.println("Furthest column = " + furthestColumn);
+		//return furthestColumn; 
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private void getFurthestLeftDyDx(Integer[][] array)
+	{
+		furthestLeftDyDx.clear();
+		int halfShapeSize = shapeSize/2; 
+		for (int col = 0 ; col < shapeSize; col++)
+		{
+			for (int row = shapeSize-1; row >= 0; row--)
+			{
+				if (array[row][col] != 0)
+				{
+					int countColOver = 0; 
+					for (int colOver = col; colOver < shapeSize; colOver++)
+					{
+						countColOver++;
+						if (countColOver > halfShapeSize)
+						{
+							break;
+						}
+						for (int rowUp = shapeSize-1; rowUp >= 0; rowUp--)
+						{
+							if (array[rowUp][colOver] != 0)
+							{
+								if (colOver == 0)
+								{
+									furthestLeftDy = shapeSize-1-rowUp;
+									furthestLeftDx = colOver;
+									furthestLeftDyDx.add(new Point (furthestLeftDx, furthestLeftDy));
+								}
+								else
+								{
+									if (array[rowUp][colOver-1] == 0)
+									{
+										furthestLeftDy = shapeSize-1-rowUp;
+										furthestLeftDx = colOver;
+										furthestLeftDyDx.add(new Point (furthestLeftDx, furthestLeftDy));
+									}
+								}
+
+							}
+
+						}
+					}
+
+
+					//System.out.println(furthestLeftDyDx);
+					return;
+				}
+			}
+		}
+	}
